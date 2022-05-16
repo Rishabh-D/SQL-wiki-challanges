@@ -1,0 +1,72 @@
+-- 4.1 Select the title of all movies.
+
+
+# select distinct(Title) from Movies;
+
+
+-- 4.2 Show all the distinct ratings in the database.
+
+
+# select distinct(Rating) from Movies;
+
+
+-- 4.3  Show all unrated movies.
+
+
+# select Title from Movies 
+# where Rating is null;
+
+
+-- 4.4 Select all movie theaters that are not currently showing a movie.
+
+
+# select Name from MovieTheaters where Movie is Null;
+
+
+-- 4.5 Select all data from all movie theaters 
+    -- and, additionally, the data from the movie that is being shown in the theater (if one is being shown).
+    
+    # select * from MovieTheaters left join Movies 
+    # on MovieTheaters.Movie = Movies.Code;
+    
+    
+-- 4.6 Select all data from all movies and, if that movie is being shown in a theater, show the data from the theater.
+
+	# select * from MovieTheaters right join Movies 
+	# on MovieTheaters.Movie = Movies.Code;
+    
+
+
+
+-- 4.7 Show the titles of movies not currently being shown in any theaters.
+
+	# select Title from Movies where Code  in (
+	# select distinct(Movie) from MovieTheaters);
+    
+    
+#     select Title from Movies left join MovieTheaters on Movies.Code = MovieTheaters.Movie
+#     	where MovieTheaters.Code is NUll;
+        
+    
+
+-- 4.8 Add the unrated movie "One, Two, Three".
+
+		
+		# Insert Into Movies (Code, Title, Rating) values (9,'One, Two, Three',NULL);
+
+
+
+
+-- 4.9 Set the rating of all unrated movies to "G".
+
+
+# Update Movies 
+# set Rating = "G" 
+# where rating is NULL;
+
+-- 4.10 Remove movie theaters projecting movies rated "NC-17".
+
+
+# DELETE FROM MovieTheaters where Movie in (select Code from Movies where Rating ="NC-17")
+
+
